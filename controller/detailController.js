@@ -1,16 +1,17 @@
 const express = require("express");
 const fetch = require("node-fetch");
+const {getDetailUrl} = require("../helpers/helpers")
 const {error} = require("../controller/errorController")
 
-exports.renderIndex = function (req, res) {
-  let url = "https://api.magicthegathering.io/v1/cards?"
-    console.log(url, "indexcontroller");
+
+exports.renderDetail = function (req, res){
+  let url = getDetailUrl(req, res)
+    console.log(req.params, "detailcontroller");
   let result = fetch(url)
-    .then(data => {
-      return data.json();
+    .then(data =>{
+      return data.json()
     })
-    .then(data => {
-      console.log(data);
+    .then(data =>{
       if (data.cards.length == 0){
         let result = {
           errors: [
@@ -21,11 +22,11 @@ exports.renderIndex = function (req, res) {
             }
           ]
         };
-        error(res, result);
-      } else {
-        res.render("pages/index", {
-          data: data.cards
+        error(res, result)
+      }else {
+        res.render("pages/detail", {
+          data: data.cards[0]
         });
       }
-    });
+    })
 }
