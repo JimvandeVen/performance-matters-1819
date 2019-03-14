@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+header{
+margin-bottom: 1em;
+}
+
+.headerImg{
+  display: inline;
+  width: 5vw;
+}
+
+header h1{
+  display: inline;
+}
+
+form {
+  margin-bottom: 1em;
+  display: flex;
+}
+
+section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  flex: flex: 1 0 26%;
+}
+
+select {
+  margin-right: 1em;
+}

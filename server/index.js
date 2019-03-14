@@ -5,26 +5,21 @@ const fetch = require("node-fetch");
 const bodyParser = require("body-parser");
 const app = express();
 
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 app.set("views", "view");
 app.set("view engine", "ejs");
 
-app.get("/", index);
+app.get("/", list);
 app.post("/", list);
 app.get("/:id", detailPage);
 
 app.listen(8000);
 console.log("Server is Listening on port 8000");
-
-function index(req, res) {
-  let result = {
-    errors: [],
-    data: undefined
-  };
-  res.render("pages/index.ejs", result);
-}
 
 function list(req, res) {
   const config = {
@@ -38,20 +33,7 @@ function list(req, res) {
   let url = `${config.endpoint}?types=${config.type}&rarity=${config.rarity}&cmc=${config.cmc}&colors=${config.colors}`;
   console.log(url);
 
-  getData(url)
-
-  function getData(url) {
-    let result = fetch(url)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        res.render("pages/index", {
-          data: data.cards
-        });
-      });
-
-  }
+  getData(req, res, url)
 }
 
 function detailPage(req, res) {
@@ -80,11 +62,50 @@ function detailPage(req, res) {
           return data.json()
         })
         .then(data =>{
-          console.log(data.cards);
-          res.render("pages/detail", {
-            data: data.cards[0]
-          });
+          if (data.cards.length == 0){
+            let result = {
+              errors: [
+                {
+                  id: 404,
+                  title: "Not Found",
+                  detail: "Not Found"
+                }
+              ]
+            };
+            res.render("pages/error", Object.assign({}, result));
+          }else {
+            res.render("pages/detail", {
+              data: data.cards[0]
+            });
+          }
         })
     }
   }
+}
+
+function getData(req, res, url) {
+
+  let result = fetch(url)
+    .then(data => {
+      return data.json();
+    })
+    .then(data => {
+      console.log(data);
+      if (data.cards.length == 0){
+        let result = {
+          errors: [
+            {
+              id: 404,
+              title: "Not Found",
+              detail: "Not Found"
+            }
+          ]
+        };
+        res.render("pages/error", Object.assign({}, result));
+      } else {
+        res.render("pages/index", {
+          data: data.cards
+        });
+      }
+    });
 }
