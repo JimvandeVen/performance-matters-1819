@@ -3,9 +3,9 @@
 <% include ../partials/form %>
 <section>
   <% if (data) {
-    data.forEach(card=>{
+    data.forEach((card, i)=>{
       if (card.imageUrl){ %>
-        <a class="card" href="/<%= card.multiverseid %>" class="cardContainer">
+        <a style="animation-delay:<%= i * 100 %>ms" class="card" href="/<%= card.multiverseid %>" class="cardContainer">
           <img alt="<%= card.name %>" src="<%= card.imageUrl %>"></img>
         </a>
     <% }

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const router = require("../router/router")
 const app = express();
 
-app.set("views", "view");
+app.set("views", "public/view");
 app.set("view engine", "ejs");
 
 app.use(express.static('public'))
