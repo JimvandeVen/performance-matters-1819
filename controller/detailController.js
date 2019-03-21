@@ -1,4 +1,3 @@
-const express = require("express");
 const fetch = require("node-fetch");
 const {getDetailUrl} = require("../helpers/helpers")
 const {error} = require("../controller/errorController")
@@ -25,7 +24,9 @@ exports.renderDetail = function (req, res){
         error(res, result)
       }else {
         res.render("pages/detail", {
-          data: data.cards[0]
+          data: data.cards[0],
+          cssFilepath: res.locals.cssFilepath,
+          jsFilepath: res.locals.jsFilepath
         });
       }
     })

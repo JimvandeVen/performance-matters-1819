@@ -1,4 +1,3 @@
-const express = require("express");
 const fetch = require("node-fetch");
 const {getListUrl} = require("../helpers/helpers")
 const {error} = require("../controller/errorController")
@@ -27,7 +26,9 @@ exports.renderList = function (req, res) {
         error(res, result);
       } else {
         res.render("pages/list", {
-          data: data.cards
+          data: data.cards,
+          cssFilepath: res.locals.cssFilepath,
+          jsFilepath: res.locals.jsFilepath
         });
       }
     });

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
+    "revision": "node task/revisioning.js",
     "watch": "nodemon server"
   },
   "repository": {
@@ -20,9 +21,16 @@
   "homepage": "https://github.com/JimvandeVen/performance-matters-1819#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "compression": "^1.7.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "file-system": "^2.2.2",
+    "fontfaceobserver": "^2.1.0",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.10"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-rev": "^9.0.0"
   }
 }
