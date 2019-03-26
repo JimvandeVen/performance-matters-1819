@@ -1,3 +1,3 @@
-exports.error = function(res, result){
+exports.error = function (res, result) {
   res.render("pages/error", Object.assign({}, result))
 }

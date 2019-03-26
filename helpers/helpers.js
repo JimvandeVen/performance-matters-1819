@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const {error} = require("../controller/errorController")
+const { error } = require("../controller/errorController")
 
 exports.getListUrl = function (req, res) {
   const config = {
@@ -11,13 +11,13 @@ exports.getListUrl = function (req, res) {
     colors: req.body.colors ? req.body.colors : ""
   };
 
-  let url =  `${config.endpoint}?types=${config.type}&rarity=${config.rarity}&cmc=${config.cmc}&colors=${config.colors}`;
+  let url = `${config.endpoint}?types=${config.type}&rarity=${config.rarity}&cmc=${config.cmc}&colors=${config.colors}`;
   console.log(url);
 
   return url
 }
 
-exports.getDetailUrl = function(req, res) {
+exports.getDetailUrl = function (req, res) {
   let multiverseid = req.params.id;
   let badRequest = isNaN(multiverseid);
 

@@ -1,12 +1,6 @@
 {
-  "css/styles-88ad42e201.css": "css/styles-88ad42e201-88ad42e201.css",
-  "css/styles-aab3bd9e17-aab3bd9e17.css": "css/styles-aab3bd9e17-aab3bd9e17-aab3bd9e17.css",
-  "css/styles-aab3bd9e17.css": "css/styles-aab3bd9e17-aab3bd9e17.css",
-  "css/styles.css": "css/styles-aab3bd9e17.css",
-  "js/fonfaceobserver-a4a00bdd0a-a4a00bdd0a.js": "js/fonfaceobserver-a4a00bdd0a-a4a00bdd0a-a4a00bdd0a.js",
-  "js/fonfaceobserver-a4a00bdd0a.js": "js/fonfaceobserver-a4a00bdd0a-a4a00bdd0a.js",
-  "js/fonfaceobserver.js": "js/fonfaceobserver-a4a00bdd0a.js",
-  "js/script-f9fec45bca-f9fec45bca.js": "js/script-f9fec45bca-f9fec45bca-f9fec45bca.js",
-  "js/script-f9fec45bca.js": "js/script-f9fec45bca-f9fec45bca.js",
-  "js/script.js": "js/script-f9fec45bca.js"
+  "css/styles.css": "css/styles-dfe9fb0f18.css",
+  "js/fonfaceobserver.js": "js/fonfaceobserver-c4a54d0032.js",
+  "js/script.js": "js/script-74edf1791a.js",
+  "service-worker.js": "service-worker-1ab7fc699b.js"
 }

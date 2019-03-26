@@ -1,0 +1,9 @@
+{
+    "name": "MTG Card Search",
+    "short_name": "MTG CS",
+    "theme_color": "#999966",
+    "background_color": "#E7E7C3",
+    "display": "browser",
+    "scope": "/",
+    "start_url": "/"
+  }

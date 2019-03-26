@@ -1,17 +1,16 @@
 const fetch = require("node-fetch");
-const {getDetailUrl} = require("../helpers/helpers")
-const {error} = require("../controller/errorController")
+const { getDetailUrl } = require("../helpers/helpers")
+const { error } = require("../controller/errorController")
 
 
-exports.renderDetail = function (req, res){
+exports.renderDetail = function (req, res) {
   let url = getDetailUrl(req, res)
-    console.log(req.params, "detailcontroller");
   let result = fetch(url)
-    .then(data =>{
+    .then(data => {
       return data.json()
     })
-    .then(data =>{
-      if (data.cards.length == 0){
+    .then(data => {
+      if (data.cards.length == 0) {
         let result = {
           errors: [
             {
@@ -22,7 +21,7 @@ exports.renderDetail = function (req, res){
           ]
         };
         error(res, result)
-      }else {
+      } else {
         res.render("pages/detail", {
           data: data.cards[0],
           cssFilepath: res.locals.cssFilepath,
