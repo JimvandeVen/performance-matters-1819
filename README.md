@@ -11,7 +11,7 @@ In this course we will convert the client side web application made earlier at t
 - [Installation](#installation)
 - [Features](#features)
 - [API](#api)
-- [Optimisations](#data)
+- [Optimisations](#optimisations)
   - [First view](#first-view)
     - [Compression](#compression)
     - [Fontface Observer](#fontface-observer)
