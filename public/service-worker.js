@@ -19,10 +19,24 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener('fetch', function (event) {
-    event.respondWith(
-        caches.match(event.request)
-            .then(function (response) {
-                return response || fetch(event.request);
+    if (
+        event.request.mode === 'navigate' ||
+        (event.request.method === 'GET' &&
+            event.request.headers.get('accept').includes('text/html'))
+    ) {
+        event.respondWith(
+            fetch(event.request.url).catch(error => {
+                // Return the offline page
+                return caches.match('/offline/offline.html')
             })
-    );
+        )
+    } else {
+        event.respondWith(
+            caches.match(event.request)
+                .then(function (response) {
+                    return response || fetch(event.request);
+                })
+        );
+    }
+
 });
