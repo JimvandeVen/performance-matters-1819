@@ -92,6 +92,7 @@ select {
   border-radius: 5px;
   background-color: #E7E7C3;
   font-size: 2rem;
+  border: 0.1em solid #E7E7C3;
 }
 
 select:hover{
@@ -105,6 +106,7 @@ button {
   width: 30%;
   height: 2em;
   font-size: 2rem;
+  border: 0.1em solid #E7E7C3;
 }
 
 button:hover{
