@@ -1,54 +1,116 @@
 # Performance Matters @cmda-minor-web · 2018-2019
 
-In dit vak gaan we de eerder bij de OBA gemaakte client side web applicatie ombouwen naar een server side gerenderde applicatie. Verder gaan we een reeks van optimalisaties doorvoeren om de performance van de applicatie te verbeteren. Uiteindelijk zorgen we ervoor dat de applicatie offline beschikbaar.
-
-## Leerdoelen
-- _Je weet het verschil tussen client side en server side rendering en kan server side rendering toepassen_
-- _Je begrijpt hoe de critical render path werkt, en hoe je deze kan optimaliseren voor een betere runtime en/of perceived performance._
-- _Je begrijpt hoe een Service Worker werkt en kan deze in jou applicatie implementeren._
-
-[Rubric](https://docs.google.com/spreadsheets/d/e/2PACX-1vTO-pc2UMvpT0pUjt6NJeckc5N9E7QvCxEfVJW1JjuM0m_9MM8ra05J0s6br486Rocz5JVMhAX_C37_/pubhtml?gid=0&single=true)
-
-## Lesprogramma
-
-### Week 1 - Server Side rendering
-
-Doel: Webpagina's server side renderen
-
-[Opdrachten](https://github.com/cmda-minor-web/performance-matters-1819/blob/master/week-1.md)
-
-[Slides](...)
-
-### Week 2 - Critical Rendering Path  
-
-Doel: Critical Rendering path optimaliseren
-[Opdrachten](https://github.com/cmda-minor-web/performance-matters-1819/blob/master/week-2.md)
-
-[Slides](...)
-
-### Week 3 - Going Offline 
-
-Doel: Webpagina's offline beschikbaar stellen
-
-[Opdrachten](https://github.com/cmda-minor-web/performance-matters-1819/blob/master/week-3.md)
-
-[Slides](...)
+## Introduction
+In this course we will convert the client side web application made earlier at the OBA to a server side rendered application. We are also going to implement a series of optimisations to improve the performance of the application. Finally we ensure that the application is available offline.
 
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
+![Screenshot](screens/screenshot.png)
 
-<!-- ☝️ replace this description with a description of your own work -->
+## Table of Contents
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+- [Installation](#installation)
+- [Features](#features)
+- [API](#api)
+- [Optimisations](#data)
+  - [First view](#first-view)
+    - [Compression](#compression)
+    - [Fontface Observer](#fontface-observer)
+  - [Repeat view](#repeat-view)
+    - [Caching](#caching)
+    - [Results](#results)
+- [Checklist](#checklist)
+- [License](#license)
 
-<!-- Maybe a table of contents here? 📚 -->
+## Installation
+1. Open your terminal
+2. Change the directory to a folder in which you want to place the files
+```bash
+cd /~path
+```
+3. Clone the repository (you're going to need [Git](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/))
+```bash
+git clone https://github.com/JimvandeVen/performance-matters-1819
+```
+4. Run 
+```bash
+npm Install
+```
+5. Run 
+```bash
+npm run watch
+```
+6. Enjoy the application
 
-<!-- How about a section that describes how to install this project? 🤓 -->
+## Features
 
-<!-- ...but how does one use this project? What are its features 🤔 -->
+My application is a search engine wherein you can find all existing magic the gathering cards. This is done with a small form with a few fields you need to fill in. After filling in the fields you get a selection of the cards that fall within your chosen filters. Up to 100 cards are shown. These cards are requested from an API where more than 10.000 cards exist. The goal is to search through those cards and find the ones you are looking for.
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
+## API
 
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+The [API](https://docs.magicthegathering.io/) I'm using is the unofficial REST interface for Magic: The Gathering. This API returns a maximum of 100 cards per call. The data you get is JSON. There is a maximum of 5000 calls per hour. The API returns data in the JSON format. 
 
-<!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
+## Optimisations
+
+### First view
+
+#### Compression
+I used [Compression](https://www.npmjs.com/package/compression) to compress files to GZIP.
+
+Before Compression
+```diff
++ CSS time 23.25ms
++ JS time 57,19ms
+```
+After Compression
+```diff
++ CSS time 12.68ms
++ JS time 36.19ms
+```
+
+#### Fontface Observer
+
+
+### Repeat view
+
+#### Unique hash digits
+
+#### Caching
+
+
+#### Results
+
+HET BUILDEN VAN DE HELE APP VIA NPM
+
+- Minification
+- file revisioning (rev-manifest)
+- Brotli ipv GZIP
+- precompression (Static site)
+- img revision tag (304 - 200)
+- srcset and sizes attributes 
+- Picture html tag (client hints) - webp met fallbacks
+- Resource hints
+- DNS-PREFETCH
+- link preconnect, prefetch, preload, prerender
+- font subsetting
+- font rendering controls (font-display: swap)
+- Reflow verminderen door op de fallback font line-height en letter-spacing te plaatsen (Font style Matcher)
+- fontFaceObserver (add class async (after font is loaded)) with a cookie and class
+- Defer, async scripts
+- Je kan styles asynchroon inladen (LoadCSS)
+- Critical CSS - minimum css nodig (lijn trekken) -->
+
+## Checklist
+- [x] Rebuild client side app to server side app
+- [x] Add Handlebars
+- [x] Minifiy files
+- [X] Add unique hash digits to css and javascript files
+- [X] Add (pre)compression
+- [X] Set cache headers (for caching)
+
+
+## Credits
+
+
+## License 
+See the [LICENSE file](https://github.com/Mennauu/web-app-from-scratch-18-19/blob/master/LICENSE) for license rights and limitations (MIT).
+
