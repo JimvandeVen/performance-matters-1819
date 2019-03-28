@@ -17,7 +17,9 @@ In this course we will convert the client side web application made earlier at t
     - [Fontface Observer](#fontface-observer)
   - [Repeat view](#repeat-view)
     - [Caching](#caching)
-    - [Results](#results)
+    - [Revisioning](#revisioning)
+- [Service Worker](#service-worker)
+  - [Offline Page](#offline-page)
 - [Checklist](#checklist)
 - [License](#license)
 
@@ -57,59 +59,53 @@ The [API](https://docs.magicthegathering.io/) I'm using is the unofficial REST i
 I used [Compression](https://www.npmjs.com/package/compression) to compress files to GZIP.
 
 Before Compression
-```diff
-+ CSS time 23.25ms
-+ JS time 57,19ms
+```
+CSS time 23.25ms
+JS time 57,19ms
 ```
 After Compression
-```diff
-+ CSS time 12.68ms
-+ JS time 36.19ms
+```
+CSS time 12.68ms
+JS time 36.19ms
 ```
 
 #### Fontface Observer
-
+Fontface Observer uses a small client side javascript file to check if the custom fonts are loaded yet. If so it adds a class to your html that uses the custom fonts. Before the fonts are loaded the other fonts in your font-stack are used. This way the user always sees the text on your website. Even before the custom fonts are loaded.
 
 ### Repeat view
 
-#### Unique hash digits
-
 #### Caching
+With the `setHeader()` function you can set the cache-control for your headers. This way you can add set the amount of time the  you can set the amount of time the browser will cache your files. This makes repeat views much, much faster.
 
+Before Caching:
+![first view](screens/nocahce.png)
 
-#### Results
+After Caching:
+![repeat view](screens/cache.png)
 
-HET BUILDEN VAN DE HELE APP VIA NPM
+### Revisioning
 
-- Minification
-- file revisioning (rev-manifest)
-- Brotli ipv GZIP
-- precompression (Static site)
-- img revision tag (304 - 200)
-- srcset and sizes attributes 
-- Picture html tag (client hints) - webp met fallbacks
-- Resource hints
-- DNS-PREFETCH
-- link preconnect, prefetch, preload, prerender
-- font subsetting
-- font rendering controls (font-display: swap)
-- Reflow verminderen door op de fallback font line-height en letter-spacing te plaatsen (Font style Matcher)
-- fontFaceObserver (add class async (after font is loaded)) with a cookie and class
-- Defer, async scripts
-- Je kan styles asynchroon inladen (LoadCSS)
-- Critical CSS - minimum css nodig (lijn trekken) -->
+But Caching brings us to the next problem. What if the css has changed? How will you serve the new css instead of the cached one? Enter Revisioning.
+
+For revisioning I used `task/revisioning.js` that is run by a command in my build step. In this file create a `manifest.json` file where I have an object that holds the paths to the revisioned css/js files. It also creates those revisioned files. Then in my views I create a variable path to my files. This variable is looked up from the manifest, file and passed along by my server. 
+
+## Service Worker
+The service worker I installed takes my static files an saves them in the cache. This enables the user to still visit previously visited pages. Or those saved in the install sequence of the service worker. I also save my static images in the service worker cache. This greatly reduces load times for repeat views and is a great fallback for when something goes wrong with either the server or the client side cache.
+
+### Offline Page
+
+The service worker also reroutes the user to an offline page when no internet is available. This makes for a softer landing.
+
+![offline](screens/offline.png)
 
 ## Checklist
 - [x] Rebuild client side app to server side app
-- [x] Add Handlebars
-- [x] Minifiy files
-- [X] Add unique hash digits to css and javascript files
-- [X] Add (pre)compression
-- [X] Set cache headers (for caching)
-
-
-## Credits
-
+- [X] Add Compression
+- [x] Add Fontface Observer
+- [X] Set cache headers
+- [x] Implement Revisioning
+- [X] Add Service Worker
+- [X] Add Offline Page
 
 ## License 
 See the [LICENSE file](https://github.com/Mennauu/web-app-from-scratch-18-19/blob/master/LICENSE) for license rights and limitations (MIT).
